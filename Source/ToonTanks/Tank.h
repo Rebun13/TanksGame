@@ -17,7 +17,7 @@ class TOONTANKS_API ATank : public ABasePawn
 public:
 	// Sets default values for this pawn's properties
 	ATank();
-	
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
@@ -28,5 +28,13 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UCameraComponent* Camera;
 
+	UPROPERTY(EditAnywhere, Category = "Variables")
+	float Speed = 200.f;
+
+	UPROPERTY(EditAnywhere, Category = "Variables")
+	float TurnRate = 50.f;
+
 	void Move(float Value);
+
+	void Turn(float Value);
 };
