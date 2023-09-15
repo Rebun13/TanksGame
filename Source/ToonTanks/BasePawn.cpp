@@ -25,6 +25,10 @@ ABasePawn::ABasePawn()
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 }
 
+void ABasePawn::HandleDestruction() {
+	// TODO: Visual/sound effects
+}
+
 void ABasePawn::RotateTurret(FVector LookAtTarget) {
 	FVector ToTarget = LookAtTarget - TurretMesh->GetComponentLocation();
 	FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
@@ -40,9 +44,10 @@ void ABasePawn::RotateTurret(FVector LookAtTarget) {
 }
 
 void ABasePawn::Fire() {
-	GetWorld()->SpawnActor<AProjectile>(
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileClass, 
 		ProjectileSpawnPoint->GetComponentLocation(), 
 		ProjectileSpawnPoint->GetComponentRotation()
 	);
+	Projectile->SetOwner(this);
 }
